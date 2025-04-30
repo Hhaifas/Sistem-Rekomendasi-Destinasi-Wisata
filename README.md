@@ -77,19 +77,19 @@ Data yang digunakan adalah dataset [Indonesia Tourism Destination](https://www.k
 
 Namun penulis hanya mengambil 3 dataset teratas yaitu tourism_with_id.csv, user.csv, dan tourism_rating.csv. Selain itu hanya mengambil destinasi pada kota Yogyakarta karena proyek ini terbatas hanya pada satu kota tujuan saja. 
 
-![image](asets/rating_destinasi.png)
+![image](rating_destinasi.png)
 Pada grafik tersebut menunjukan distribusi rating pada tiap destinasi. Menunjukkan rating berkisar antara 4-5 dengan 4.5 adalah rating paling banyak diberikan. 
 
-![image](asets/jumlah_kategori_wisata.png)
+![image](jumlah_kategori_wisata.png)
 Pada grafik tersebut wisata terbanyak di Yogyakarta adalah taman hiburan dengan persentase sebesar 28.6%. dilanjut kategori budaya sebesar 27%, kategori cagar budaya 23.8%, kategori Bahari 18.3%, dan pusat perbelanjaan sebesar 2.4%. 
 
-![image](asets/harga_tiket.png)
+![image](harga_tiket.png)
 Pada grafik tersebut menunjukkan harga tiket termahal di tempat wisata di Yogyakarta. Hasilnya Goa Jomblang adalah wisata dengan harga tiket termahal dengan harga Rp 500.000. 
 
-![image](asets/destinasi_rating_terbanyak.png)
+![image](destinasi_rating_terbanyak.png)
 Pada grafik tersebut menunjukkan bahwa Sumur Gumuling adalah wisata yang banyak diulas oleh pengunjung
 
-![image](asets/asal_pengunjung.png)
+![image](asal_pengunjung.png)
 Pada grafik tersebut menunjukkan banyaknya pengunjung tiap kota asal. Pengunjung banyak berasal dari Bekasi. Madura dan Nganjuk adalah kota yang paling sedikit pengunjung ke Yogyakarta. 
 
 

@@ -126,12 +126,19 @@ Sebelum melakukan modeling, penulis melakukan preparation pada data yang akan di
   - k: banyaknya rekomendasi yang ingin diberikan
 
 `destination_recommendation('Pantai Greweng')`
+
 Place_Name - Category
+
 Pantai Congot	- Bahari
+
 Pantai Sundak	- Bahari
+
 Pantai Depok Jogja	- Bahari
+
 Hutan Mangrove Kulon Progo - Bahari
+
 Pantai Sadranan	- Bahari
+
 
 Rekomendasi menghasilkan kategori yang sama pada destinasi Pantai Greweng.
 
@@ -147,15 +154,25 @@ Berikut merupakan hasil rekoemendasi dari user 129:
 **Wisata Kraton Jogja : Budaya**
 
 Top 10 destination recommendation
+
 Situs Warungboto-Taman Hiburan
+
 Sumur Gumuling-Taman Hiburan
+
 Desa Wisata Sngai Code Jogja Kota-Taman Hiburan
+
 Monumen Yogya Kembali-Budaya
+
 Bukit Bintang Yogyakrta-Taman Hiburan
+
 Monumen Sanapati-Budaya
+
 The World Landmarks - Merapi Park Yogyakarta-Taman Hiburan
+
 Watu Goyang-Budaya
+
 Kampung Wisata Rejowinangun-Budaya
+
 Alun-alun Utara Keraton Yogyakarta-Budaya
 
 Hasil tersebut menunjukkan rekomendasi untuk user 235. Hasil rekomendasi destinasi adalah 6 kategori Taman hiburan dan 4 kategori budaya. 

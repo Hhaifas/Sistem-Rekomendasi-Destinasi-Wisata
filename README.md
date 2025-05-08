@@ -22,58 +22,86 @@ Di tengah maraknya kunjungan wisata dan informasi digital yang melimah, wisatawa
 
 ### Problem Statements
 
-- Informasi tempat wisata yang kurang relevan dengan preferensi individu
-- Kurangnya variasi tujuan wisata
-- Tidak merata kunjungan wisatawan yang datang ke wisata tertentu
+1. Informasi tempat wisata yang kurang relevan dengan preferensi individu
+2. Kurangnya variasi tujuan wisata
+3. Tidak merata kunjungan wisatawan yang datang ke wisata tertentu
 
 ### Goals
 
 1. Meningkatkan pengalaman pengunjung
+
    Pengunjung memiliki preferensi yang berbeda-beda. Dengan menyediakan sistem rekomendasi destinasi wisata yang sesuai dengan minat dan kebutuhan secara personal akan meningkatkan pengalaman pengunjung sehingga perjalanan wisata menjadi lebih menyenangkan.
 2. Menyebarkan arus kunjungan
+
    Salah satu tantangan dalam dunia pariwisata adalah konsentrasi kunjungan di lokasi tertentu, sementara destinasi lainnya cenderung sepi. Dengan menyebarkan arus kunjungan wisata maka potensi tempat wisata menjadi merata dan seimbang.
 3. Mengoptimalkan promosi destinasi lokal
+
    Destinasi yang kurang dikenal bisa dimunculkan dalam rekomendasi pengguna dengan preferensi yang cocok. Hal ini lebih efektif dibandingkan promosi umum karena menyasar audiens yang sudah potensial tertarik, sehingga dapat meningkatkan tingkat kunjungan secara organik.
   
-Algoritma yang akan digunakan berupa:
+### Solution Statement
+Untuk menyelesaikan permasalahan tersebut, digunakan algoritma sistem rekomendasi. Algoritma yang akan digunakan berupa:
 - Content-Based Filtering
   Metode ini akan menyarankan destinasi berdasarkan karakteristik yang mirip dengan tempat yang disukai pengunjung
 - Collaborative Filtering
   Metode ini digunakan untuk menemukan destinasi baru berdasarkan preferensi pengunjung lain yang serupa sehingga rekomendasi yang akan dihasilkan lebih beragam.
 
 ## Data Understanding
-Data yang digunakan adalah dataset [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination/data) yang didapatkan dari Kaggle. Dataset ini berisi 4 file, yaitu tourism_witd_id.csv, user.csv, tourism_rating.csv, dan package_tourism.csv. Namun penulis hanya mengambil 3 dataset teratas yaitu tourism_with_id.csv, user.csv, dan tourism_rating.csv. Selain itu hanya mengambil destinasi pada kota Yogyakarta karena proyek ini terbatas hanya pada satu kota tujuan saja. 
-* Dataset: https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination/data
-### [Tourism Rating](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination?select=tourism_rating.csv)
-* Data ini berisi 10000 baris dengan 3 kolom. Berisi rating-rating yang diberikan oleh pengguna dan dibuat untuk sistem rekomendasi berbasis rating.
+Data yang digunakan adalah dataset [Indonesia Tourism Destination](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination/data) yang didapatkan dari Kaggle. Dataset ini berisi 4 file, yaitu tourism_witd_id.csv, user.csv, tourism_rating.csv, dan package_tourism.csv. Namun penulis hanya mengambil 3 dataset teratas yaitu tourism_with_id.csv, user.csv, dan tourism_rating.csv. Selain itu hanya mengambil destinasi pada kota Yogyakarta karena proyek ini terbatas hanya pada satu kota tujuan saja.
+  
+### **1. Tourism Rating**
+Data ini berisi 10000 baris dengan 3 kolom. Berisi rating-rating yang diberikan oleh pengguna dan dibuat untuk sistem rekomendasi berbasis rating.
+* **URL:**
+
+  https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination?select=tourism_rating.csv
+* **Jumlah baris dan kolom:**
+
+  Data berisi 10000 baris dan 3 kolom.
+* **Kondisi data:**
+
+  Data bebas dari missing value, duplikat dan sebagainya.
+* **Fitur:**
+  * User_Id : berisi user id untuk tiap pengunjung. Terdapat 300 jumlah pengguna
+  * Place_Id : berisi id tempat untuk tempat yang dikunjungi oleh pengunjung. Terdapat 437 place_id yang mewakili nama tempat. 
+  * Place_Ratings : berisi penilaian atau rating yang diberikan oleh pengunjung berdasarkan tempat kunjungan mereka. Terdapat 10000 input rating tempat.
+    
+### **2. User**
+Data ini berisi pengguna dummy untuk membuat fitur rekomendasi berdasarkan user. Data ini memiliki 28 lokasi yang berbeda dengan rata-rata usia pengguna adalah 28 tahun.
+* **URL**
+
+  https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination?select=user.csv
+* **Jumlah baris dan kolom**
+
+  Data ini terdapat 300 baris dengan 3 kolom.
+* **Kondisi data**
+  
+  Data bebas dari missing value, duplikat dan sebagainya.
+* **Fitur:**
+  * User_Id : user id untuk tiap pengunjung. Terdapat 300 user_Id.
+  * Location : asal kota tiap pengunjung. Terdapat 28 lokasi. 
+  * Age : umur tiap pengunjung
+    
+### **3. Tempat dan Ratingnya**
+Berisi informasi tempat wisata yang ada di 5 kota besar di Indonesia, seperti Jakarta, Surabaya, Yogyakarta, Bandung, dan Bali. Terdapat 437 destinasi wisata yang tersebar di 5 kota besar beserta rating, deskripsi, kategori, harga tiket masuk, dan lokasi destinasi tersebut.
+* **URL**
+
+  https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination?select=tourism_with_id.csv
+* **Jumlah baris dan kolom**
+
+  Data ini terdapat kurang lebih 400 baris dengan 12 kolom.
+* **Kondisi data**
+
+  Pada fitur Time_Minutes terdapat missing value sebanyak 232. Terdapat 2 fitur yang tidak berguna seperti Unnamed: 11 dan Unnamed: 12.
 * Fitur:
-  - User_Id : berisi user id untuk tiap pengunjung
-  - Place_Id : berisi id tempat untuk tempat yang dikunjungi oleh pengunjung
-  - Place_Ratings : berisi penilaian atau rating yang diberikan oleh pengunjung berdasarkan tempat kunjungan mereka.
-### [User](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination?select=user.csv)
-* Data ini terdapat 300 baris dengan 3 kolom.
-* Data ini berisi pengguna dummy untuk membuat fitur rekomendasi berdasarkan user.
-* Data ini memiliki 28 lokasi yang berbeda dengan rata-rata usia pengguna adalah 28 tahun.
-* Fitur:
-  - User_Id : user id untuk tiap pengunjung
-  - Location : asal kota tiap pengunjung
-  - Age : umur tiap pengunjung
-### [Tempat dan Ratingnya](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination?select=tourism_with_id.csv)
-* Data ini terdapat kurang lebih 400 baris dengan 12 kolom.
-* Berisi informasi tempat wisata yang ada di 5 kota besar di Indonesia, seperti Jakarta, Surabaya, Yogyakarta, Bandung, dan Bali.
-* Terdapat 437 destinasi wisata yang tersebar di 5 kota besar beserta rating, deskripsi, kategori, harga tiket masuk, dan lokasi destinasi tersebut.
-* Pada fitur time terdapat missing value sebanyak 232.
-* Fitur:
-  - Place_Id : berisi unik dari Place_Name
-  - Place_Name : berisi nama tempat 
-  - Desription : berisi deskripsi dari nama tempat
-  - Category : berisi kategori dari nama tempat
-  - City : berisi kota setiap tempat wisata
-  - Price : berisi harga tiket masuk
-  - Rating : berisi rating setiap tempat wisata
-  - Time_Minutes : tidak diketahui
-  - Coordinate : lokasi geografis tempat wisata.
-  - Lat : lokasi suatu titik tempat. 
+  * Place_Id : berisi unik id dari Place_Name. Terdapat 437 Place_Id yang berarti terdapat 437 nama tempat yang berbeda. 
+  * Place_Name : berisi nama tempat 
+  * Desription : berisi deskripsi dari nama tempat
+  * Category : berisi kategori dari nama tempat. Terdapat 6 kategori tempat wisata, yaitu: Budaya, Taman Hiburan, Cagar Alam, Bahari, Pusat Perbelanjaan, dan Tempat Ibadah.
+  * City : berisi kota setiap tempat wisata. Terdapat 5 kota yang terdiri dari 5 kota besar di Indonesia, yaitu: Jakarta, Surabaya, Yogyakarta, Bandun dan Bali.  
+  * Price : berisi harga tiket masuk.
+  * Rating : berisi rating setiap tempat wisata. Rating berkisar dari 1-5.
+  * Time_Minutes : tidak diketahui.
+  * Coordinate : lokasi geografis tempat wisata.
+  * Lat : lokasi suatu titik tempat. 
 
 ### EDA
 ![image](rating_destinasi.png)
@@ -95,22 +123,32 @@ Pada grafik tersebut menunjukkan banyaknya pengunjung tiap kota asal. Pengunjung
 ## Data Preparation
 Sebelum melakukan modeling, penulis melakukan preparation pada data yang akan digunakan. 
 1. Mengatasi Missing Value
+
    Pada data destination terdapat missing pada dua fitur. Fitur tersebut akan dihapus dengan menggunakan `.drop()` karena fitur tersebut tidak dibutuhkan dalam pemodelan nanti
 
 ### Data Preparation CBF
 1. Mengambil destinasi hanya pada daerah Yogyakarta
+
    `destination[destination['City'] == 'Yogyakarta']`
 2. Mengambil data rating pada daerah Yogyakarta
+
    Menggunanakn fungsi `.merge()` pada data rating dan destination untuk mengambil destinasi pada daerah Yogyakarta
 3. Mengambil data user pada userId yang memberi ulasan hanya pada daerah Yogyakarta
+
    Dengan fungsi `.merge()` kali ini data rating akan digabung dengan data user pada daerah UserId yang memberi rating pada daerah Yogyakarta
+4. Melakukan TF-IDF
+
+   TF-IDF adalah metode yang digunakan untuk mengevaluasi seberapa penting suatu kata dalam sebuah dokumen dalam konteks koleksi dokumen yang lebih besar. Metode ini mengukur frekuensi kemunculan kata di dalam sebuah dokumen dan frekuensi di dalam banyak dokumen. Dengan kata lain, TF-IDF membantu menentukan relevansi suatu kata dalam suatu dokumen dibandingkan dengan dokumen-dokumen lainnya.
+   Pada kasus ini TF-IDF akan mengubah bentuk data menjadi matriks yang akan digunakan untuk perhitungan cosine similarity menggunanakan fungsi `TfidfVectorizer()`.
   
   
-## Data Preparation Collaborative Filtering
+### Data Preparation Collaborative Filtering
 1. Melakukan Encoding dan Mapping
+
    Encoding dan Mapping adalah proses untuk mengubah data object menjadi numerik. Hal ini penting dilakukan untuk mempermudah model mengolah data. Mapping dilakukan untuk menambah data yang di sudah di-encoded kembali ke DataFrame
    Encoding pada User_Id dan Place_Id agar Id memiliki nilai yang sama dimulai dari 0.
-3. Membagi data menjadi data uji dan data latih
+2. Membagi data menjadi data uji dan data latih (Split dataset)
+
    Train Test Split adalah proses membagi data menjadi data Train (latih), dan Test (uji), dimana Train untuk latihan model, dan Test untuk uji model.
    Pada proyek ini, penulis mengambil nilai x dari kolom user dan destination dan nilai y dari kolom Place_Ratings.
 
@@ -118,25 +156,26 @@ Sebelum melakukan modeling, penulis melakukan preparation pada data yang akan di
 ## Modeling
 
 ### Content Based Filtering
-1. Melakukan TF-IDF
-   TF-IDF adalah metode yang digunakan untuk mengevaluasi seberapa penting suatu kata dalam sebuah dokumen dalam konteks koleksi dokumen yang lebih besar. Metode ini mengukur frekuensi kemunculan kata di dalam sebuah dokumen dan frekuensi di dalam banyak dokumen. Dengan kata lain, TF-IDF membantu menentukan relevansi suatu kata dalam suatu dokumen dibandingkan dengan dokumen-dokumen lainnya.
-   Pada kasus ini TF-IDF akan mengubah bentuk data menjadi matriks yang akan digunakan untuk perhitungan cosine similarity menggunanakan fungsi `TfidfVectorizer()`.
-3. Menghitung Cosine Similarity
+1. Menghitung Cosine Similarity
+
    Cosine Similarity adalah pengukuran yang digunakan untuk mengukur dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama. Cosine similarity akan menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. Metrik ini sering digunakan untuk mengukur kesamaan dokumen dalam analisis teks.
-   Sebagai contoh, dalam studi kasus ini, cosine similarity digunakan untuk mengukur kesamaan nama tempat dan nama kaetgori.
-   Pada tahap ini, Cosine Similarity cukup digunakan dengan memanggil cosine_similarity() pada matriks hasil TF-IDF.
-4. Mendapatkan Rekomendasi
+
+   Sebagai contoh, dalam studi kasus ini, cosine similarity digunakan untuk mengukur kesamaan nama tempat dan nama kaetgori. Pada tahap ini, Cosine Similarity cukup digunakan dengan memanggil cosine_similarity() pada matriks hasil TF-IDF.
+2. Mendapatkan Rekomendasi
+
    Selanjutnya membuat fungsi rekomendasi dengan nama destination_recommendation(). Parameter yang digunakan adalah:
    - place_name : nama tempat
    - similarity_data: dataframe mengenai similarity yang sudah didefinisikan sebelumnya
    - items: nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah 'Place_Name' dan 'Category'
    - k: banyaknya rekomendasi yang ingin diberikan
-5. Sample Retrival
+3. Sample Retrival
+
    Contoh rekomendasi
    |Place_Id | Place_Name |	Description	| Category | City | Price | Rating | Coordinate | Lat |	Long |
    |---------|------------|-------------|----------|------|-------|--------|------------|-----|------|
    |198	     |Pantai Greweng|Di Kabupaten Gunungkidul, tidak sulit memilih ...|Bahari|Yogyakarta|5000|4.6|{'lat': -8.197864399999998, 'lng': 110.7186216}|-8.197864|110.718622|
-6. Recommendation Result - Top N Recommendations
+4. Recommendation Result - Top N Recommendations
+
    Untuk menghasilkan rekomendasi panggil fungsi `destination_recommendation()`
    |  |Place_Name|Category|
    |--|----------|--------|
@@ -151,14 +190,17 @@ Sebelum melakukan modeling, penulis melakukan preparation pada data yang akan di
 
 ### Collaborative Filtering
 1. Membuat kelas RecommenderNet dengan keras Model class.
+
    RecommenderNet akan menghitung skor kecocokan antar user dan tempat wisata dengan teknik embedding, melakukan operasi dot product, dan menambahkan bias untuk setiap user dan tempat wisata. Selanjutnya akan menghasilkan skala kecocokan dari 0 hingga 1 dengan fungsi Sigmoid.
 2. Membuat model dengan memanggil kelas RecommenderNet untuk membuat rekomendasi
 3. Melakukan compile pada model dengan menggunakan Binary Crossentropy untuk menghitung loss function Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation.
 4. Training: model dilakukan training sebanyak 100 epochs, 8 batch_size, validation_data dengan x_val dan y_val.
 5. Sample Retrieval
+
    Penulis mengambil sample user dan destinasi dengan rating tertinggi dari user tersebut.
    Didapatkan user 129 dan destinasi wisata rating tertinggi dari user adalah Wisata Kraton Jogja dengan kategori Budaya.
 7. Prediction Result
+
    Hasilnya untuk 10 destinasi rekomendasi adalah:
    |Place_Name|Category|
    |----------|--------|
@@ -202,8 +244,19 @@ Sebelum melakukan modeling, penulis melakukan preparation pada data yang akan di
    Evaluasi yang dilakukan untuk model collaborative filtering adalah dengan menggunakan metrik RMSE. RMSE adalah akar kuadrat dari MSE. Secara matematis, RMSE mengukur deviasi standar kesalahan. Mirip dengan MSE, RMSE banyak digunakan dalam regresi dan estimasi model yang memerlukan prediksi numerik.
    Hasilnya, untuk data uji nilai RMSE naik dengan nilai akhir 0.36 sementara untuk data latih nilai RMSE cenderung turun di angka 0.3.
 
-Berdasarkan problem statement yang ada, sistem rekomendasi dengan dua pendekatan tersebut dapat memberikan rekomendasi yang efektif. Dilihat dari evaluasi yang menggunakan metrik precision menghasilkan nilai 1 yang artinya semua prediksi positif model adalah benar dan tidak terdapat false positive. 
-Kemudian ketika menggunakan metrik RMSE, nilai RMSE berkisar pada angka 0.3 yang artinya cukup baik dalam memprediksi suatu item. 
-Sistem rekomendasi ini akan memberikan informasi kepada pengguna yang ingin melakukan perjalanan wisata dengan destinasi wisata yang sesuai dengan preferensi mereka. 
+Berdasarkan problem statement yang ada:
+1. Informasi tempat wisata yang kurang relevan dengan preferensi individu
 
+   Dengan menggunakan algoritma content based filtering, hal ini dapat memberikan informasi tempat wisata yang sesuai dengan preferensi individu karena algoritma ini akan memberikan rekomendasi berupa tempat wisata yang mempunyai karakteristik yang disukai pengguna. 
+2. Kurangnya variasi tujuan wisata
 
+   Dengan menggunakan algoritma collaborative filtering, sistem rekomendasi akan memberikan rekomendasi tempat wisata yang bervariasi sehingga pengguna akan mendapatkan informasi yang lebih beragam tetapi tetap sesuai dengan karakteristik kesukaan pengguna. 
+3. Tidak merata kunjungan wisatawan yang datang ke wisata tertentu
+   
+   Dengan adanya sistem rekomendasi ini, pengguna dapat menjangkau tempat wisata yang belum pernah mereka kunjungi sebelumnya karena sistem ini akan merekomendasikan berbagai macam jenis tempat wisata yang sesuai dengan karakteristik pengguna. 
+
+Dengan ini sistem rekomendasi dapat memberikan peningkatan pengalaman pengunjung, menyebarkan arus kunjungan ke tempat wisata yang belum pernah dikunjungi, dan dapat mengoptimasliasi promosi destinasi lokal yang memang butuh perkembangan untuk didukung.
+
+Sistem rekomendasi dengan dua pendekatan tersebut dapat memberikan rekomendasi yang efektif. Dilihat dari evaluasi yang menggunakan metrik precision menghasilkan nilai 1 yang artinya semua prediksi positif model adalah benar dan tidak terdapat false positive pada sistem rekomendasi content based filtering. Kemudian ketika menggunakan metrik RMSE untuk sistem rekomendasi collaborative filtering, nilai RMSE berkisar pada angka 0.3 yang artinya cukup baik dalam memprediksi suatu item. 
+
+Sistem rekomendasi ini akan memberikan dampak bagi pengunjung maupun pemilik tempat wisata lokal dengan memberikan informasi kepada pengguna yang ingin melakukan perjalanan wisata dengan destinasi wisata yang sesuai dengan preferensi mereka. 
